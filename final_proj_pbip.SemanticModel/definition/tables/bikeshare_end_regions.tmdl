@@ -1,0 +1,31 @@
+table bikeshare_end_regions
+	lineageTag: 2aaefd25-1c0e-4c58-a042-2b8c8037af27
+
+	column region_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b5ddb728-141e-4aed-8d01-9327c7179e1d
+		summarizeBy: none
+		sourceColumn: region_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 6444bcfc-6dfb-4469-b517-bd2413b076e3
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition bikeshare_end_regions = m
+		mode: import
+		source =
+				let
+				    Источник = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"bigquery-public-data_Database" = Источник{[Name="bigquery-public-data",Kind="Database"]}[Data],
+				    san_francisco_bikeshare_Schema = #"bigquery-public-data_Database"{[Name="san_francisco_bikeshare",Kind="Schema"]}[Data],
+				    bikeshare_regions_Table = san_francisco_bikeshare_Schema{[Name="bikeshare_regions",Kind="Table"]}[Data]
+				in
+				    bikeshare_regions_Table
+

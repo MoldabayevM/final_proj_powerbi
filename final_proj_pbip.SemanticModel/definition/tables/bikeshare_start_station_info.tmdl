@@ -1,0 +1,94 @@
+table bikeshare_start_station_info
+	lineageTag: b9bfd772-8613-47fd-9efa-67a4c3adcc89
+
+	column station_id
+		dataType: string
+		lineageTag: ee7d9327-ae23-43b2-a436-be7bddab1dca
+		summarizeBy: none
+		sourceColumn: station_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 3fa536f4-6ae3-4288-988f-33f22b852a7a
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column short_name
+		dataType: string
+		lineageTag: b819a955-535d-46f6-9de1-249f4ed3a652
+		summarizeBy: none
+		sourceColumn: short_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column lat
+		dataType: double
+		lineageTag: 9a0d03fd-5c9c-414d-8b25-c69462b65643
+		summarizeBy: sum
+		sourceColumn: lat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lon
+		dataType: double
+		lineageTag: 2336391a-5f96-421e-9c63-fb470ab91fbb
+		summarizeBy: sum
+		sourceColumn: lon
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column region_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a8bd2b1-fe7a-41ec-a1df-99f0a3578ca5
+		summarizeBy: none
+		sourceColumn: region_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column capacity
+		dataType: int64
+		formatString: 0
+		lineageTag: 332d5d06-e4ae-4700-ac0a-9e565a9a5257
+		summarizeBy: sum
+		sourceColumn: capacity
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_kiosk
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ef277b21-87db-44c9-970e-be26cb422f1e
+		summarizeBy: none
+		sourceColumn: has_kiosk
+
+		annotation SummarizationSetBy = Automatic
+
+	column station_geom
+		dataType: string
+		lineageTag: cc6bbfbc-d527-454c-948b-2904a5fb499e
+		summarizeBy: none
+		sourceColumn: station_geom
+
+		annotation SummarizationSetBy = Automatic
+
+	partition bikeshare_start_station_info = m
+		mode: import
+		source =
+				let
+				    Источник = bikeshare_end_station_info
+				in
+				    Источник
+
+	annotation PBI_NavigationStepName = Навигация
+
+	annotation PBI_ResultType = Table
+

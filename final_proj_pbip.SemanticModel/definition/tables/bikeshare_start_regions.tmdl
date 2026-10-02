@@ -1,0 +1,32 @@
+table bikeshare_start_regions
+	lineageTag: 04b04834-d164-4a7d-8b41-f868872c0b8d
+
+	column region_id
+		dataType: int64
+		formatString: 0
+		lineageTag: af1784e2-519e-4419-8ddb-429f022915ca
+		summarizeBy: none
+		sourceColumn: region_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: db821792-f5e8-43df-a8b8-2d8ec4d7ec74
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition bikeshare_start_regions = m
+		mode: import
+		source =
+				let
+				    Источник = bikeshare_end_regions
+				in
+				    Источник
+
+	annotation PBI_NavigationStepName = Навигация
+
+	annotation PBI_ResultType = Table
+

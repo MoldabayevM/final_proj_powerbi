@@ -1,0 +1,67 @@
+table Calendar
+	lineageTag: 03edef1a-9fe9-418f-92a5-9b009ecc2a30
+
+	column Date
+		formatString: General Date
+		lineageTag: eae1c5dc-8cbe-488e-a105-2634d62d90cd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Изменение
+			isDefault
+			relationship: 77767889-e689-48d7-9ae4-58f082788e0a
+			defaultHierarchy: LocalDateTable_bcf0f512-ad09-4fa2-8596-1ad0789feec0.'Иерархия дат'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year = YEAR('Calendar'[Date])
+		formatString: 0
+		lineageTag: 39da723b-7e7b-4631-b077-964edcd1a604
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qrt = ```
+			QUARTER('Calendar'[Date]) 
+			```
+		formatString: 0
+		lineageTag: 24b8fa3b-0aae-4cb5-8a10-592ea5692fb1
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_No = MONTH('Calendar'[Date])
+		formatString: 0
+		lineageTag: 543f3c89-2264-4303-ae67-6ce1ba1100a6
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_Name = FORMAT('Calendar'[Date], "MMMM")
+		lineageTag: 010ec51e-5d0d-49e0-a01b-924e2bbf78d3
+		summarizeBy: none
+		sortByColumn: Month_No
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day_Name = FORMAT('Calendar'[Date], "DDDD")
+		lineageTag: 7474bdaa-e40e-4e7c-997a-4aa91f4b89e4
+		summarizeBy: none
+		sortByColumn: Day_No
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day_No = WEEKDAY( 'Calendar'[Date], 2 )
+		formatString: 0
+		lineageTag: 23b1aa7c-99a5-46a6-9160-6ca2602413be
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendar = calculated
+		mode: import
+		source = CALENDAR(MIN('bikeshare_trips'[start_date]), MAX('bikeshare_trips'[end_date]) )
+
+	annotation PBI_Id = 006cb42cb24f4cec9867449afeb3dd98
+

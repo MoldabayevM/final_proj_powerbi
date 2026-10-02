@@ -1,0 +1,36 @@
+table Меры
+	lineageTag: fada2324-db34-43fc-9d5e-8f8ac9ee5482
+
+	measure 'Общее время поездок' = SUMX( bikeshare_trips, bikeshare_trips[end_date] - bikeshare_trips[start_date] ) * 24
+		lineageTag: 5d45d356-d6ec-4c0d-82fd-8e4f6b468df9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Среднее количество поездок в день' = ```
+			AVERAGEX(VALUES('Calendar'[Date]), 'Меры'[Количество поездок]) 
+			```
+		lineageTag: 23b44b5f-c02d-417a-866d-83a2ae1bf536
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Количество поездок' = COUNT( bikeshare_trips[trip_id] )
+		formatString: 0
+		lineageTag: ca25643d-3d72-4007-b8bc-e3af4281f4d6
+
+	measure 'Среднее время поездки, мин' = AVERAGEX(bikeshare_trips, DATEDIFF( bikeshare_trips[start_date], bikeshare_trips[end_date], MINUTE))
+		lineageTag: 44427c12-f664-4698-9682-df9b5fe4525f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Меры = m
+		mode: import
+		source =
+				let
+				    Источник = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Столбец1 = _t]),
+				    #"Измененный тип" = Table.TransformColumnTypes(Источник,{{"Столбец1", type text}}),
+				    #"Удаленные столбцы" = Table.RemoveColumns(#"Измененный тип",{"Столбец1"})
+				in
+				    #"Удаленные столбцы"
+
+	annotation PBI_ResultType = Table
+
