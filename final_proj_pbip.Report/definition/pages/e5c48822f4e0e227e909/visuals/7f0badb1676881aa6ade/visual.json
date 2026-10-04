@@ -1,0 +1,215 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "7f0badb1676881aa6ade",
+  "position": {
+    "x": 16.466607480862326,
+    "y": 233.27693931221629,
+    "z": 9000,
+    "height": 281.30454446473141,
+    "width": 381.47640663997726,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "bikeshare_trips"
+                    }
+                  },
+                  "Property": "start_station_name"
+                }
+              },
+              "queryRef": "bikeshare_trips.start_station_name",
+              "nativeQueryRef": "start_station_name",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Меры"
+                    }
+                  },
+                  "Property": "Количество поездок"
+                }
+              },
+              "queryRef": "Меры.Количество поездок",
+              "nativeQueryRef": "Количество поездок"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Меры"
+                    }
+                  },
+                  "Property": "Дней работы"
+                }
+              },
+              "queryRef": "Меры.Дней работы",
+              "nativeQueryRef": "Дней работы"
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "bikeshare_trips.start_station_name"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "88.50000133233908D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Меры.Количество поездок"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "184.19579704383753D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "bikeshare_trips.start_station_name"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "714ab2f785f3b67665b3",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Меры"
+              }
+            },
+            "Property": "Количество поездок"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6ce00c4b3a41654b1df0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "bikeshare_trips"
+              }
+            },
+            "Property": "start_station_name"
+          }
+        },
+        "type": "TopN"
+      },
+      {
+        "name": "7f81714c938a6ed932cb",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Меры"
+              }
+            },
+            "Property": "Дней работы"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "46d17326e599fa602a28",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Меры"
+              }
+            },
+            "Property": "Ранг снизу"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "м",
+              "Entity": "Меры",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 4,
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "м"
+                        }
+                      },
+                      "Property": "Ранг снизу"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "10L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  }
+}
